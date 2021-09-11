@@ -79,3 +79,37 @@ def tweet_search(api, query, max_tweets, max_id, since_id, geocode):
             time.sleep(15 * 60)
             break  # stop the loop
     return searched_tweets, max_id
+
+
+def get_tweet_id(api, date='', days_ago=9, query='a'):
+    ''' Function that gets the ID of a tweet. This ID can then be
+        used as a 'starting point' from which to search. The query is
+        required and has been set to a commonly used word by default.
+        The variable 'days_ago' has been initialized to the maximum
+        amount we are able to search back in time (9).'''
+
+    if date:
+        # return an ID from the start of the given day
+        td = date + dt.timedelta(days=1)
+        tweet_date = '{0}-{1:0>2}-{2:0>2}'.format(td.year, td.month, td.day)
+        tweet = api.search(q=query, count=1, until=tweet_date, lang='mr')
+    else:
+        # return an ID from __ days ago
+        td = dt.datetime.now() - dt.timedelta(days=days_ago)
+        tweet_date = '{0}-{1:0>2}-{2:0>2}'.format(td.year, td.month, td.day)
+        # get list of up to 10 tweets
+        tweet = api.search(q=query, count=5, until=tweet_date, lang='mr')
+        print('search limit (start/stop):', tweet[0].created_at)
+        # return the id of the first tweet in the list
+        return tweet[0].id
+
+
+def write_tweets(tweets, filename):
+    ''' Function that appends tweets to a file. '''
+
+    with open(filename, 'a') as f:
+        f.write('{"data": [')
+        for tweet in tweets:
+            json.dump(tweet._json, f)
+            f.write(',\n')
+        f.write(']}')
