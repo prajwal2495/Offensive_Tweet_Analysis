@@ -124,7 +124,7 @@ def main():
     time_limit = 1.5  # runtime limit in hours
     max_tweets = 1000  # number of tweets per search (will be
     # iterated over) - maximum is 1000
-    min_days_old, max_days_old = 1, 7  # search limits e.g., from 7 to 8
+    min_days_old, max_days_old = 1, 8  # search limits e.g., from 7 to 8
     # gives current weekday from last week,
     # min_days_old=0 will search from right now
     USA = '39.8,-95.583068847656,2500km'  # this geocode includes nearly all American
