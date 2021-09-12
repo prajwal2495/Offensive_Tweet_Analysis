@@ -25,3 +25,13 @@ def clean_text(row, options):
         row = re.sub('[+,-,_,=,/,<,>,!,#,$,%,^,&,*,\",:,;,.,' ',\t,\r,\n,\',|]','',row)
 
     return row
+
+clean_config = {
+    'remove_url': True,
+    'remove_mentions': True,
+    'decode_utf8': True,
+    'lowercase': True,
+    'remove_english':True,
+    'remove_specials':True,
+    'add_USER_tag':True
+    }
