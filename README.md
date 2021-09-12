@@ -8,7 +8,7 @@ Proposing a solution to tackle this problem by generating an automated tool that
 ## Twitter Scrapper
 
 This is a simple twitter scrapper which uses tweepy library of python to extract tweets based on the query, which is a list of Marathi phrases.
-We use our own consumer_key, consumer_secret, access_token and access_secret to auntheticate the API and make a call to it.
+We use our own API_KEY, API_SECRET_KEY, ACCESS_TOKEN and ACCESS_SECRET_KEY to auntheticate the API and make a call to it.
 All the searched ad extracted tweets are stored in a JSON file, the format is as follows.
 ```
  with open(filename, 'a') as f:
