@@ -35,3 +35,48 @@ clean_config = {
     'remove_specials':True,
     'add_USER_tag':True
     }
+
+
+def demoji(text):
+    emoji_pattern = re.compile("["
+        u"\U0001F600-\U0001F64F"  # emoticons
+        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+        u"\U0001F680-\U0001F6FF"  # transport & map symbols
+        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+        u"\U00002702-\U000027B0"
+        u"\U000024C2-\U0001F251"
+        u"\U00010000-\U0010ffff"
+                               "]+", flags=re.UNICODE)
+    return(emoji_pattern.sub(r'', text))
+
+
+def main():
+    # csv file
+    input_file = ''
+
+    dataset = pd.read_csv(input_file)
+
+    dataset_df = pd.DataFrame(dataset)
+
+    dataset_df = dataset_df[["data/text"]]
+
+    #lowe case conversion
+    dataset_df['data/text'] = dataset_df['data/text'].str.lower()
+
+    # calling pre-processing function
+    dataset_df['data/text'] = dataset_df['data/text'].apply(clean_text, args=(clean_config,))
+
+    #stripping leading and trailing whitespaces
+    dataset_df['data/text'] = dataset_df['data/text'].str.strip()
+
+    #remove emojis - not working
+    dataset_df.astype(str).apply(lambda x: x.str.encode('ascii', 'ignore').str.decode('ascii'))
+
+    #remove emojis - working
+    dataset_df['data/text'] = dataset_df['data/text'].apply( lambda x : demoji(x))
+
+    # convert df to csv
+    dataset_df.to_csv('cleaned_मुर्खा.csv',index = False)
+
+if __name__ == "__main__":
+    main()
