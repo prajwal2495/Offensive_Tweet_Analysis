@@ -1,5 +1,5 @@
 # Offensive Language indentification in tweets
-## An automated model trained to detect whether a tweet is offensive or not on multiple levels of classification.
+## An automated model trained to detect whether a tweet is offensive or not on multiple levels of classification. ( in development )
 
 Digital bullying is happening on a daily basis and all of us are facing in form or another on social media. 
 
