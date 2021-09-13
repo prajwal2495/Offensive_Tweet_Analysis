@@ -17,7 +17,7 @@ consumer secret, access token, and access secret into the load_api()
 function below.
 
 The main() function can be run by executing the command: 
-python twitter_search.py
+python Twitter_Scrapper.py
 
 We used Python 3 and tweepy version 3.5.0.  You will also need the other
 packages imported above.
