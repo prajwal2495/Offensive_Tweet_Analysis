@@ -30,7 +30,7 @@ clean_config = {
     'remove_url': True,
     'remove_mentions': True,
     'decode_utf8': True,
-    'lowercase': True,
+    'lowercase': False,
     'remove_english':True,
     'remove_specials':True,
     'add_USER_tag':True
@@ -52,31 +52,36 @@ def demoji(text):
 
 def main():
     # csv file
-    input_file = ''
+    input_file = './CSV_Data/मुर्खा_2021-04-28_to_2021-05-03.csv'
 
     dataset = pd.read_csv(input_file)
 
     dataset_df = pd.DataFrame(dataset)
 
-    dataset_df = dataset_df[["data/text"]]
+    dataset_df = dataset_df[["text"]]
+    #print(dataset_df)
+
+    #remove NaN
+    dataset_df.dropna()
+
 
     #lowe case conversion
-    dataset_df['data/text'] = dataset_df['data/text'].str.lower()
+    dataset_df['text'] = dataset_df['text'].str.lower()
 
     # calling pre-processing function
-    dataset_df['data/text'] = dataset_df['data/text'].apply(clean_text, args=(clean_config,))
+    dataset_df['text'] = dataset_df['text'].apply(clean_text, args=(clean_config,))
 
     #stripping leading and trailing whitespaces
-    dataset_df['data/text'] = dataset_df['data/text'].str.strip()
+    dataset_df['text'] = dataset_df['text'].str.strip()
 
     #remove emojis - not working
     dataset_df.astype(str).apply(lambda x: x.str.encode('ascii', 'ignore').str.decode('ascii'))
 
     #remove emojis - working
-    dataset_df['data/text'] = dataset_df['data/text'].apply( lambda x : demoji(x))
+    dataset_df['text'] = dataset_df['text'].apply( lambda x : demoji(x))
 
     # convert df to csv
-    dataset_df.to_csv('',index = False)
+    dataset_df.to_csv('./CSV_Data/Murkha_pre_processed.csv',index = False)
 
 if __name__ == "__main__":
     main()
