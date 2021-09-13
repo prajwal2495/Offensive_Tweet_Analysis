@@ -24,6 +24,7 @@ def clean_text(row, options):
     if options['remove_specials']:
         row = re.sub('[+,-,_,=,/,<,>,!,#,$,%,^,&,*,\",:,;,.,' ',\t,\r,\n,\',|]','',row)
 
+
     return row
 
 clean_config = {
@@ -63,6 +64,9 @@ def main():
 
     #remove NaN
     dataset_df.dropna()
+
+    #drop dupes
+    dataset_df.drop_duplicates(subset="text", keep = False, inplace=True)
 
 
     #lowe case conversion
