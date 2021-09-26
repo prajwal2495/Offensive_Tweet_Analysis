@@ -66,7 +66,7 @@ def main():
     dataset_df.dropna()
 
     #drop dupes
-    dataset_df.drop_duplicates(subset=None, keep = True, inplace=True)
+   # dataset_df.drop_duplicates(subset=None, keep = True, inplace=True)
 
 
     #lowe case conversion
